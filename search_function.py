@@ -1,9 +1,27 @@
 
+def wordSnippets(searchWordLength):
+    snippetCountx3 = 0
+    snippetCountx2 = 0
+    snippetCountx1 = 0
+
+    snippetCountx3 = searchWordLength // 3
+    searchWordLength -= snippetCountx3*3
+
+    snippetCountx2 = searchWordLength // 2
+    searchWordLength -= snippetCountx2*2
+
+    snippetCountx1 = searchWordLength // 1
+
+    print(snippetCountx3, snippetCountx2, snippetCountx1)
+    return snippetCountx3, snippetCountx2, snippetCountx1
+
 def main(list, word):
     searchWordLength = len(word)
+    snippetCountx3, snippetCountx2, snippetCountx1 = wordSnippets(searchWordLength)
     for listWord in list:
         listWordLength = len(listWord)
         listWordSimilarityScore = 0
+
         for i in range(searchWordLength):
             try:
                 try:
