@@ -7,12 +7,12 @@ def main(list, word):
         for i in range(searchWordLength):
             try:
                 try:
-                    listOfLetters = listWord[i:i+3]
+                    listOfLetters = word[i:i+3]
                 except:
                     try:
-                        listOfLetters = listWord[i:i+2]
+                        listOfLetters = word[i:i+2]
                     except:
-                        listOfLetters = listWord[i]
+                        listOfLetters = word[i]
 
                 listOfLettersLength = len(listOfLetters)
                 if listOfLettersLength == 0:
@@ -20,7 +20,8 @@ def main(list, word):
                 listOfLettersSimilarityScore = 0
 
                 for letter in listOfLetters:
-                    if letter in word[i:i+listOfLettersLength]:
+                    wordComparisonSnippet = listWord[i:i+listOfLettersLength]
+                    if letter in wordComparisonSnippet:
                         listOfLettersSimilarityScore += 1
                         continue
                     else:
@@ -42,7 +43,8 @@ if __name__ == '__main__':
         "word",
         "hi",
         "goodbye",
-        "atypical"
+        "atypical",
+        "typical"
     ]
     word = input("Enter search term - ")
     main(listOfWords, word.lower())
