@@ -1,3 +1,4 @@
+from english_words import english_words_set
 
 def wordSnippets(wordLength):
     snippetCountx1 = 0
@@ -36,15 +37,15 @@ def wordSimilarityFunc(snippets, searchWord, comparisonWord):
 def main(listOfWords, searchWord):
     foundWordList = []
 
-    #Possibly Redundant
+    #Fast search for word
     if searchWord in listOfWords:
-        foundWordList.append(listOfWords[listOfWords.index(searchWord)])
-        return foundWordList
-
+        foundWordList.append(searchWord)
+        del(listOfWords[listOfWords.index(searchWord)])
 
     searchWordLength = len(searchWord)
     numberOfSearchWordSnippets = wordSnippets(searchWordLength)
 
+    #Searching for any words similar
     for word in listOfWords:
         wordSimilarity = wordSimilarityFunc(numberOfSearchWordSnippets, searchWord, word)
         if wordSimilarity >= sum(numberOfSearchWordSnippets)/3:
@@ -57,14 +58,7 @@ def main(listOfWords, searchWord):
 
 
 if __name__ == '__main__':
-    listOfWords = [
-        "hello",
-        "word",
-        "hi",
-        "goodbye",
-        "atypical",
-        "typical"
-    ]
+    listOfWords = [i.lower() for i in english_words_set]
     word = input("Enter search term - ")
     foundWordList = main(listOfWords, word.lower())
     try:
