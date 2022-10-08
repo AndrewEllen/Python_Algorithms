@@ -23,10 +23,7 @@ def wordSimilarityFunc(snippets, searchWord, comparisonWord):
                 try:
                     if searchWord[letterNumber] == comparisonWord[letterNumber]:
                         snippetSimilarity += 1
-                    else:
-                        snippetSimilarity -= 1
                 except:
-                    snippetSimilarity -= 1
                     continue
             if snippetSimilarity >= (3-i)/2:
                 wordSimilarity += 1
