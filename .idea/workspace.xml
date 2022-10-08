@@ -47,7 +47,7 @@
       <option name="presentableId" value="Default" />
       <updated>1664997751846</updated>
       <workItem from="1664997760842" duration="12086000" />
-      <workItem from="1665195631321" duration="4226000" />
+      <workItem from="1665195631321" duration="6404000" />
     </task>
     <servers />
   </component>
@@ -66,6 +66,6 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Python_Algorithms$search_function.coverage" NAME="search_function Coverage Results" MODIFIED="1665199826418" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Python_Algorithms$search_function.coverage" NAME="search_function Coverage Results" MODIFIED="1665202019746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
