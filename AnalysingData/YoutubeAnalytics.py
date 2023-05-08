@@ -1,4 +1,5 @@
 import csv
+import matplotlib.pyplot as plot
 
 #This script analyses some of my downloaded youtube daily data over the last 8 or so years
 
@@ -9,6 +10,15 @@ class videoTypeObject:
         self.views = views
         self.subscribersGained = subscribersGained
 
+class analysedStats:
+   def __init__(self, numberOfShortsViewDays, numberOfVideosViewDays, totalShortsSubscribersGained, totalVideosSubscribersGained, totalShortsViews, totalVideosViews):
+      self.numberOfShortsViewDays = numberOfShortsViewDays
+      self.numberOfVideosViewDays = numberOfVideosViewDays
+      self.totalShortsSubscribersGained = totalShortsSubscribersGained
+      self.totalVideosSubscribersGained = totalVideosSubscribersGained
+      self.totalShortsViews = totalShortsViews
+      self.totalVideosViews = totalVideosViews
+
 
 def readInAnalyticsData():
     
@@ -18,40 +28,61 @@ def readInAnalyticsData():
     reader = csv.reader(csvfile, delimiter=",", quotechar="|")
     next(reader, None)
     for row in reader:
-        entries.append(videoTypeObject(row[0], row[1], row[2], row[3]))
+        if int(row[2]) != 0 or int(row[3]) != 0:
+          entries.append(videoTypeObject(row[0], row[1], row[2], row[3]))
 
   return entries
 
 
 def analyseSubscriberGainPerType(entries):
    
-  numberOfShorts = 0
-  numberOfVideos = 0
+  numberOfShortsViewDays = 0
+  numberOfVideosViewDays = 0
   totalSubscribersShorts = 0
   totalSubscribersVideos = 0
+  totalViewsShorts = 0
+  totalViewsVideos = 0
 
   for entry in entries:
     if entry.videoType == "Shorts":
-      numberOfShorts += 1
+      numberOfShortsViewDays += 1
       totalSubscribersShorts += int(entry.subscribersGained)
+      totalViewsShorts += int(entry.views)
 
-    elif entry.videoType =="Videos":#
-       numberOfVideos += 1
+    elif entry.videoType =="Videos":
+       numberOfVideosViewDays += 1
        totalSubscribersVideos += int(entry.subscribersGained)
+       totalViewsVideos += int(entry.views)
+
+  return analysedStats(numberOfShortsViewDays, numberOfVideosViewDays, totalSubscribersShorts, totalSubscribersVideos, totalViewsShorts, totalViewsVideos)
 
 
-  print("The total subscribers gained from the shorts page is", totalSubscribersShorts)
-  print("The total subscribers gained from the videos page is", totalSubscribersVideos)
+def displayGraphs(analysedData, entries):
+   
+  x = [1,2]
+  y = [analysedData.totalShortsSubscribersGained, analysedData.totalVideosSubscribersGained]
 
-  print("On average a short gets", totalSubscribersShorts/numberOfShorts, "Subscribers")
-  print("On average a video gets", totalSubscribersVideos/numberOfVideos, "Subscribers")
+  labels = ["Shorts", "Videos"]
+  
+  plot.bar(x, y, tick_label = labels, width = 1, color = ["red","purple"])
 
-  print("The difference between videos subscribers and shorts subsribers gain is", totalSubscribersShorts/totalSubscribersVideos, "times the amount")
+  plot.xlabel("Video Type")
+  plot.ylabel("Subscribers Gained")
+
+  plot.title("Subscribers Gained vs video type")
+
+  plot.show()
+
+
+    
 
 
 
 
 if __name__ == "__main__":
-  entries = readInAnalyticsData()
 
-  analyseSubscriberGainPerType(entries)
+  entries = readInAnalyticsData()
+  analysedData = analyseSubscriberGainPerType(entries)
+
+  displayGraphs(analysedData, entries)
+
