@@ -1,5 +1,6 @@
 from english_words import english_words_set
 
+
 def wordSnippets(wordLength):
     snippetCountx1 = 0
     snippetCountx2 = 0
@@ -29,7 +30,7 @@ def wordSimilarityFunc(snippets, searchWord, comparisonWord, searchSensitivity):
             if snippetSimilarity >= (3-i)/searchSensitivity:
                 wordSimilarity += 1
             else:
-                wordSimilarity -= 2
+                wordSimilarity -= 1
             searchWord = searchWord[3-i:len(searchWord)]
             comparisonWord = comparisonWord[3-i:len(comparisonWord)]
     return wordSimilarity
@@ -53,7 +54,7 @@ def main(listOfWords, searchWord, searchSensitivity=2, foundWordPercentage=45):
         wordSimilarityPercentage = percentage*wordSimilarity
 
         if wordSimilarityPercentage >= foundWordPercentage:
-            foundWordList.append([word,wordSimilarityPercentage])
+            foundWordList.append([word, wordSimilarityPercentage])
 
     return foundWordList
 
@@ -64,11 +65,9 @@ def main(listOfWords, searchWord, searchSensitivity=2, foundWordPercentage=45):
 if __name__ == '__main__':
     listOfWords = [i.lower() for i in english_words_set]
 
-    print(max(listOfWords, key=len))
-
     word = input("Enter search term - ")
     #searchSensitivity controls how close each snippet has to be to the searched word. 3 is low, 1 is high
-    searchSensitivity = 2
+    searchSensitivity = 1
     foundWordPercentage = 45
     foundWordList = main(listOfWords, word.lower(), searchSensitivity, foundWordPercentage)
     try:
