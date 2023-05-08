@@ -7,7 +7,7 @@ class videoTypeObject:
         self.date = date
         self.videoType = videoType
         self.views = views
-        self.subscibersGained = subscribersGained
+        self.subscribersGained = subscribersGained
 
 
 def readInAnalyticsData():
@@ -23,6 +23,35 @@ def readInAnalyticsData():
   return entries
 
 
+def analyseSubscriberGainPerType(entries):
+   
+  numberOfShorts = 0
+  numberOfVideos = 0
+  totalSubscribersShorts = 0
+  totalSubscribersVideos = 0
+
+  for entry in entries:
+    if entry.videoType == "Shorts":
+      numberOfShorts += 1
+      totalSubscribersShorts += int(entry.subscribersGained)
+
+    elif entry.videoType =="Videos":#
+       numberOfVideos += 1
+       totalSubscribersVideos += int(entry.subscribersGained)
+
+
+  print("The total subscribers gained from the shorts page is", totalSubscribersShorts)
+  print("The total subscribers gained from the videos page is", totalSubscribersVideos)
+
+  print("On average a short gets", totalSubscribersShorts/numberOfShorts, "Subscribers")
+  print("On average a video gets", totalSubscribersVideos/numberOfVideos, "Subscribers")
+
+  print("The difference between videos subscribers and shorts subsribers gain is", totalSubscribersShorts/totalSubscribersVideos, "times the amount")
+
+
+
 
 if __name__ == "__main__":
-   print(readInAnalyticsData()[0].date)
+  entries = readInAnalyticsData()
+
+  analyseSubscriberGainPerType(entries)
